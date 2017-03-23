@@ -1,0 +1,29 @@
+{
+  "name": "travwindow",
+  "authors": [
+    "Marcelo Francisco <marcelo.francisco@webtravessa.com.br>"
+  ],
+  "description": "Bibliteca de Pops baseada em bootstrap",
+  "main": "dist/trav-window.js",
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "config.rb",
+    "gulpfile.js",
+    "sass",
+    "external",
+    ".sass-cache"
+  ],
+  "keywords": [
+    "trav-window",
+    "travwindow"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap": "^3.3.7"
+  },
+  "devDependencies": {
+    "highlightjs": "^9.10.0"
+  }
+}

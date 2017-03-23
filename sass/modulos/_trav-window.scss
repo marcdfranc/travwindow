@@ -1,0 +1,198 @@
+// ! Comentario simples
+
+.trav-view-reset {
+	overflow: hidden;
+}
+
+#olo {
+
+}
+
+.trav-modal {
+	@extend %position-absolute;
+	@extend %overflow-hidden;
+
+	&.trav-simple-message {
+		@extend %position-fixed;
+
+		z-index: 500;
+	}
+
+	.trav-modal-title {
+		@extend %display-table;
+		@extend %width-100;
+
+
+		&.alert-default {
+			background-color: $table-bg-hover;
+		}
+
+		* {
+			@extend %display-table-cell;
+		}
+
+		.trav-close {
+			@extend %vertical-align-middle;
+			@extend %text-align-right;
+
+			color: $text-color;
+			width: 20px;
+			height: 18px;
+			padding: 4px;
+
+			&:hover {
+				@extend %text-decoration-none;
+			}
+		}
+	}
+
+	.trav-modal-footer {
+		@extend %width-100;
+		@extend %overflow-hidden;
+
+		background-color: $table-bg-hover;
+		padding: 20px;
+
+		.btn {
+			@extend %display-table-cell;
+
+			margin: 0 15px 0 0;
+		}
+
+		&.trav-right{
+			padding: 5px 0;
+
+			.modal-footer-content {
+				@extend %display-table;
+				@extend %float-right;
+
+				border-spacing: 15px;
+				border-collapse: separate;
+			}
+
+			.btn {
+				@extend %display-table-cell;
+			}
+		}
+	}
+
+
+	.trav-modal-content, .trav-modal-title  {
+		@extend %overflow-hidden ;
+
+		padding: 20px;
+	}
+
+
+	.trav-modal-content,
+	&.trav-left,
+	&.trav-right {
+		background-color: $body-bg;
+		z-index: 501;
+	}
+
+
+	&.trav-bottom {
+		@extend %width-100;
+		@extend %bottom-0;
+		@extend %height-0;
+	}
+
+	&.trav-top {
+		@extend %width-100;
+		@extend %top-0;
+		@extend %display-block;
+		@extend %height-0;
+
+		white-space: nowrap;
+		clear: both;
+
+	/*	&.no-tg
+			@extend %display-block;
+			@extend %height-0;
+
+			white-space: nowrap;
+		}*/
+	}
+
+	&.trav-left {
+		@extend %left-0;
+
+		&.trav-open {
+			border-top: 1px solid $gray-lighter;
+			border-right: 1px solid $gray-lighter;
+			border-bottom: 1px solid $gray-lighter;
+		}
+	}
+
+	&.trav-right {
+		@extend %right-0;
+
+		&.trav-open {
+			border-top: 1px solid $gray-lighter;
+			border-bottom: 1px solid $gray-lighter;
+			border-left: 1px solid $gray-lighter;
+		}
+	}
+
+	&.trav-left,
+	&.trav-right{
+		@extend %width-0;
+		@extend %height-100;
+		@extend %top-0;
+		@extend %overflow-auto;
+	}
+
+	&.trav-center {
+		@extend %left-50;
+		@extend %top-0;
+		@extend %height-0;
+	}
+}
+
+#trav-view-port {
+	@extend %position-absolute;
+	@extend %top-0;
+
+	#trav-view-content {
+		@extend %position-relative;
+		@extend %top-50;
+	}
+
+	#trav-overlay {
+		@extend %width-0;
+		@extend %height-0;
+		@extend %position-absolute;
+		@extend %top-50;
+		@extend %left-50;
+
+		background-color: $gray-base;
+
+		@include border-radius(100%);
+		@include opacity(0.25);
+		@include transition-property(width, top, left, height);
+		@include transition-duration(1s);
+	}
+
+	@include transition-property(z-index);
+	@include transition-delay(2s);
+}
+
+
+.overlay-active {
+	@extend %overflow-hidden;
+
+	#trav-view-port {
+		z-index: 500;
+
+		#trav-overlay {
+			width: 150%;
+			height: 150%;
+			top: -25%;
+			left: -25%;
+
+			@include transition-property(width, top, left, height);
+			@include transition-duration(1s);
+		}
+	}
+}

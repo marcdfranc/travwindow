@@ -1,0 +1,24 @@
+{
+  "name": "trav_window",
+  "version": "1.0.0",
+  "description": "Gernciador de pops baseado em bootstrap",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://ftp.webtravessa.com.br:22/home/webtravessa/gitRepos/lib-trav_window"
+  },
+  "author": "Marcelo Francisco <marcelo.francisco@webtravessa.com.br>",
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-ignore": "^2.0.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.1",
+    "gulp-uglifycss": "^1.0.6",
+    "vinyl-paths": "^2.1.0"
+  }
+}
