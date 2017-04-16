@@ -6,7 +6,7 @@
  * @return {DOM}
  */
 
-// !  comentario 
+// !  comentario
 jQuery.travwindow = function (settings) {
 	/**
 	 * template para botão fechar
@@ -207,7 +207,7 @@ jQuery.travwindow = function (settings) {
 						addActionListeners($(this));
 						if (options.delay > 0) {
 							var temp = $(this);
-							setTimeout(function () { closePop(temp); } , options.delay);
+							setTimeout(function () { close(temp); } , options.delay);
 						}
 					});
 				} else {
@@ -218,7 +218,7 @@ jQuery.travwindow = function (settings) {
 						addActionListeners($(this));
 						if (options.delay > 0) {
 							var temp = $(this);
-							setTimeout(function () { closePop(temp); } , options.delay);
+							setTimeout(function () { close(temp); } , options.delay);
 						}
 					});
 				}
@@ -232,7 +232,7 @@ jQuery.travwindow = function (settings) {
 						addActionListeners($(this));
 						if (options.delay > 0) {
 							var temp = $(this);
-							setTimeout(function () { closePop(temp); } , options.delay);
+							setTimeout(function () { close(temp); } , options.delay);
 						}
 					});
 				} else {
@@ -243,7 +243,7 @@ jQuery.travwindow = function (settings) {
 						addActionListeners($(this));
 						if (options.delay > 0) {
 							var temp = $(this);
-							setTimeout(function () { closePop(temp); } , options.delay);
+							setTimeout(function () { close(temp); } , options.delay);
 						}
 					});
 				}
@@ -257,7 +257,7 @@ jQuery.travwindow = function (settings) {
 				addActionListeners($(this));
 				if (options.delay > 0) {
 					var temp = $(this);
-					setTimeout(function () { closePop(temp); } , options.delay);
+					setTimeout(function () { close(temp); } , options.delay);
 				}
 			});
 		} else if(options.position == 'center') {
@@ -279,7 +279,7 @@ jQuery.travwindow = function (settings) {
 				closePopAction($(this));
 				if (options.delay > 0) {
 					var temp = $(this);
-					setTimeout(function () { closePop(temp); } , options.delay);
+					setTimeout(function () { close(temp); } , options.delay);
 				}
 			});
 		}
@@ -581,7 +581,7 @@ jQuery.travwindow = function (settings) {
 			} else if (options.position == 'left' || options.position == 'right') {
 				element.addClass('trav-open').animate({
 					width: options.width + options.unit
-	 			}, 500, function () {
+				 }, 500, function () {
 					closePopAction($(this));
 				});
 			} else if (options.position == 'center') {
