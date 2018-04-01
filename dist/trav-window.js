@@ -420,28 +420,62 @@ jQuery.travwindow = function (settings) {
 				$('body').append('<div id="trav-view-port" class="trav-view-reset"><div id="trav-overlay"></div><div id="trav-view-content" class="trav-view-reset"></div></div>');
 			}
 
-			if ((options.position === 'center' && $(this).parent().attr('id') !== 'trav-view-content')
-			|| (options.isModal && $(this).parent().attr('id') !== 'trav-view-content')) {
+			if ((options.position === 'center' && $(this).parent().attr('id') !== 'trav-view-content') || (options.isModal && $(this).parent().attr('id') !== 'trav-view-content')) {
 				$('#trav-view-content').append($(this));
 			}
 
-			if (window.innerHeight > window.innerWidth) {
-				distance = window.innerHeight;
+			var topPosition = 0;
+			var leftPosition = 0;
+			var marginLeft = 0;
+
+			if (window.innerHeight > window.innerWidth) {			
+				distance = window.innerHeight;					
+				marginLeft = (distance - window.innerWidth) / 2;
+				leftPosition = -1 * marginLeft;
 			} else {
 				distance = window.innerWidth;
 				topPosition = (distance - window.innerHeight) / 2;
 			}
 
 			if (options.isModal) {
+				/*if (options.height > window.innerHeight && (options.position = 'bottom' || options.position == 'top')) {
+					$('#trav-view-port').css({
+						'height': options.height,
+						'width': distance,
+						'overflow-y': 'auto',
+						'left': leftPosition,						
+						'top': $(window).scrollTop() - topPosition
+					}).find('#trav-view-content').css({
+						'height': options.height,
+						'width': window.innerWidth,
+						'margin-left': marginLeft,
+						'margin-top': ((topPosition / 2) - (window.innerHeight / 2))
+					});				
+				} else {
+					$('#trav-view-port').css({
+						'height': distance,
+						'width': distance,
+						'left': leftPosition,						
+						'top': $(window).scrollTop() - topPosition
+					}).find('#trav-view-content').css({
+						'height': window.innerHeight,
+						'width': window.innerWidth,
+						'margin-left': marginLeft,
+						'margin-top':  -1 * window.innerHeight / 2 
+					});
+				}*/
+
 				$('#trav-view-port').css({
-					'height': distance,
-					'width': distance,
-					'top': $(window).scrollTop() - topPosition
-				}).find('#trav-view-content').css({
-					'height': window.innerHeight,
-					'width': window.innerWidth,
-					'margin-top':  -1 * window.innerHeight / 2
-				});
+						'height': distance,
+						'width': distance,
+						'left': leftPosition,						
+						'top': $(window).scrollTop() - topPosition
+					});/*.find('#trav-view-content').css({
+						'height': window.innerHeight,
+						'width': window.innerWidth,
+						'margin-left': marginLeft,
+						'margin-top':  -1 * window.innerHeight / 2 
+					});*/
 			}
 		}
 
@@ -520,6 +554,22 @@ jQuery.travwindow = function (settings) {
 			});
 		};
 
+		var getOptions = function (element) {
+			return options;
+		};
+
+		var resizePop = function (element) {
+			
+			if ($(element).hasClass('trav-bottom') || $(element).hasClass('trav-top')) {
+				options.distance = $(element).height();
+				options.position = $(element).hasClass('trav-bottom') ? 'bottom' : 'top';
+				options.closeOnEsc = $(element).hasClass('trav-open'); 
+				setTimeout(showPop(element), 530);
+			} else {
+
+			}
+		};
+
 		/**
 		 * inicia o processo de abertura de uma pop
 		 * @param  {Object} element Objeto Jquery a ser aberto em forma de pop
@@ -563,17 +613,73 @@ jQuery.travwindow = function (settings) {
 					});
 				} else {
 					if (options.closeOnEsc && !element.hasClass('trav-open')) {
-						element.addClass('trav-open').addClass('no-rem').animate({
-							height: options.height
-						}, 500, function () {
+						element.addClass('trav-open').addClass(function () {
+							var heightNew = options.height; 
 							closePopAction($(this));
-						});
+							console.log(topPosition);
+							if (heightNew > window.innerHeight) {
+								parentEle = $('#trav-view-port').css({
+									'overflow-y': 'auto',
+									'height': heightNew
+								}).find('#trav-view-content');
+								if (heightNew > parentEle.height()) {
+									parentEle.css({
+										'height': heightNew,
+										'width': window.innerWidth,
+										'margin-left': (window.innerWidth /  2) * -1,
+										'margin-top': ((heightNew / 2) - topPosition) * -1
+									});									
+								}
+							} else {
+								$('#trav-view-port').css({
+									'overflow-y': 'hidden'
+								}).find('#trav-view-content').css({
+									'margin-top': (window.innerHeight / 2) * -1,
+									'height': window.innerHeight,
+									'width': window.innerWidth,
+									'margin-left': (window.innerWidth / 2) * -1
+								});
+							}
+							return 'no-rem';
+						}).animate({height: options.height}, 500);
+
+
+
+
 						console.log(element);
 					} else {
 						element.addClass('no-rem').animate({
 							height: options.height
 						}, 500, function () {
-							closePopAction($(this));
+							//closePopAction($(this));
+							var heightNew = $(this).height(); 
+							if (heightNew > window.innerHeight) {
+								parentEle = $('#trav-view-port').css({
+									'overflow-y': 'auto',
+									//'width': window.innerWidth,
+									'height': heightNew
+								}).find('#trav-view-content');
+
+								//if (heightNew > parentEle.height()) {
+									parentEle.animate({	
+										'height': heightNew,
+										'width': window.innerWidth,	
+										'top': 0,	
+										'margin-left': (window.innerWidth / 2) * -1,						
+										'margin-top': (heightNew - window.innerHeight)
+									}, 500);
+								//}
+							} else {
+								$('#trav-view-port').css({
+									'overflow-y': 'hidden'
+								}).find('#trav-view-content').css({
+									'height': options.distance,
+									'width': window.innerWidth,
+									'top': options.position == 'bottom' ? '100%' : '0',
+									'margin-left': (window.innerWidth / 2) * -1,
+									'margin-top': options.position == 'bottom'? (options.distance - 1) * -1 : 0
+								});
+							}
 						});
 					}
 				}
@@ -610,6 +716,10 @@ jQuery.travwindow = function (settings) {
 			close(this, false);
 		} else if (metod === 'destroy') {
 			close(this, true);
+		} else if (metod === 'resizePop') {
+			resizePop(this);
+		} else if (metod === 'getOptions') {
+			return getOptions(this);
 		} else {
 			options = $.extend(options, metod);
 			show(this);
@@ -627,5 +737,12 @@ $(function () {
 		if(e.keyCode == 27){
 			$(this).find('.trav-open:last').travwindow('destroy');
 		}
+	});
+
+	$(window).resize(function () {
+		$('body').find('.trav-open').each(function (i) {
+			var opt = $(this).travwindow('getOptions');
+			$(this).travwindow('resizePop', opt);
+		});
 	});
 });

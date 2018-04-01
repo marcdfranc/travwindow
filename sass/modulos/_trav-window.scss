@@ -143,8 +143,7 @@
 		@extend %overflow-auto;
 	}
 
-	&.trav-center {
-		@extend %left-50;
+	&.trav-center {		
 		@extend %top-0;
 		@extend %height-0;
 	}
@@ -157,6 +156,10 @@
 	#trav-view-content {
 		@extend %position-relative;
 		@extend %top-50;
+		@extend %left-50;
+		
+		/*background-color: cyan;
+		opacity: 0.5;*/
 	}
 
 	#trav-overlay {
