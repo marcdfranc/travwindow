@@ -20,5 +20,8 @@
     "gulp-uglify": "^2.0.1",
     "gulp-uglifycss": "^1.0.6",
     "vinyl-paths": "^2.1.0"
+  },
+  "dependencies": {
+    "kind-of": "^6.0.3"
   }
 }
